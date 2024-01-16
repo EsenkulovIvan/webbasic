@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace App\Models;
 
 class Profile
 {
@@ -12,5 +12,4 @@ class Profile
     private $aboutMe;
     private $gender;
     private $familyStatus = [];
-
 }

@@ -1,0 +1,11 @@
+form {
+    border: 1px solid black;
+    padding: 20px;
+    margin-top: 150px;
+}
+.color-background-head {
+    background-color: greenyellow;
+}
+.btn {
+    background-color: #2aabd2;
+}

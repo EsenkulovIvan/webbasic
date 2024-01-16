@@ -1,6 +1,6 @@
 <?php
 
-namespace app\connect;
+namespace App\Connect;
 
 class DataBase
 {
