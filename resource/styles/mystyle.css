@@ -1,16 +1,21 @@
 form {
-    border: 1px solid black;
-    padding: 20px;
-
-}
-forma1 {
-    border: 1px solid black;
     padding: 20px;
     margin-top: 150px;
+    background-color: #9acfea;
 }
 .color-background-head {
     background-color: greenyellow;
 }
 #colorp {
     background-color: white;
+}
+body {
+    background-image: url(http://webbasic/resource/images/image115-22.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

@@ -2,12 +2,21 @@
 
 namespace App\Connect;
 
+use PDO;
+
 class DataBase
 {
-    private static $dataBaseObject;
+    private static self $dataBaseObject;
     private $pdo;
-    private function __construction()
+
+    public function getPdo()
     {
+        return $this->pdo;
+    }
+
+    private function __construction(): void
+    {
+
         $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS);
     }
 

@@ -8,12 +8,13 @@
 </head>
 <body>
 <div class="container">
+    <?php if ('questionnaire'): ?>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <form action="" class="forma1">
-                <h4 class="text-center">
+                <h3 class="text-center">
                     <strong>Заполните свои персональные данные</strong>
-                </h4>
+                </h3>
                 <div class="form-group color-background-head">
                     <lable>
                         <strong>Фамилия</strong>
@@ -23,7 +24,7 @@
                 <div class="form-group color-background-head">
                     <lable>
                         <strong>Имя</strong>
-                        <input type="text" name="nameUser" class="form-control" placeholder="Имя">
+                        <input type="text" name="name" class="form-control" placeholder="Имя">
                     </lable>
                 </div>
                 <div class="form-group color-background-head">
@@ -35,7 +36,7 @@
                 <div class="form-group">
                     <lable class="color-background-head btn-block">
                         <strong>Место работы</strong>
-                        <input type="text" name="work" class="form-control" placeholder="Организация">
+                        <input type="text" name="company" class="form-control" placeholder="Организация">
                     </lable>
                     <p class="help-block">В случае отсутствия поставить прочерк</p>
                 </div>
@@ -111,6 +112,8 @@
             </form>
         </div>
     </div>
+    <?php endif; ?>
+    <?php if ('list'): ?>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <table class="table table-bordered table-hover">
@@ -120,16 +123,19 @@
                     <th>Имя пользователя</th>
                     <th>Почтовый ящик</th>
                     <th>Телефон</th>
+                    <th>Дата регистрации</th>
                 </tr>
                 <tr>
                     <td>1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
+                    <td>5</td>
                 </tr>
             </table>
         </div>
     </div>
+    <?php endif ?>
 </div>
 </body>
 </html>
