@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 spl_autoload_register(function (string $className) {
     $classNameFull = str_replace("\\", "/", mb_strtolower($className));
     preg_match('#(?<namespace>\w+/\w+)/(?<class>\w+)#', $classNameFull, $matches);

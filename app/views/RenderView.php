@@ -2,6 +2,8 @@
 
 namespace App\Views;
 
+use App\Models\User;
+
 class RenderView
 {
     private static $view;
@@ -19,7 +21,7 @@ class RenderView
         return self::$view;
     }
 
-    public function renderTemplate($template, $valueForTemplate)
+    public function renderTemplate($template, $valueForTemplate, $user)
     {
         require $this->pathToTemplate . '/' . $template . '.php';
     }

@@ -8,10 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <?php if ('questionnaire'): ?>
+    <?php if ($valueForTemplate === 'questionnaire'): ?>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <form action="" class="forma1">
+        <div class="col-md-8 col-md-offset-2 color_style form_profile">
+            <form action="">
                 <h3 class="text-center">
                     <strong>Заполните свои персональные данные</strong>
                 </h3>
@@ -38,7 +38,6 @@
                         <strong>Место работы</strong>
                         <input type="text" name="company" class="form-control" placeholder="Организация">
                     </lable>
-                    <p class="help-block">В случае отсутствия поставить прочерк</p>
                 </div>
                 <div class="form-group color-background-head">
                     <lable for="selectId">
@@ -74,30 +73,18 @@
                     </lable>
                 </div>
                 <div class="checkbox">
-                    <strong>Вредные привычки</strong>
+                    <strong>Состоите в браке</strong>
                     <div class="col-md-offset-1">
                         <lable class="checkbox-inline">
-                            <input type="checkbox" name="smoke" value="Курит">
-                            Курите
-                        </lable>
-                        <lable class="checkbox-inline">
-                            <input type="checkbox" name="alcohol" value="Употребляет">
-                            Употребляете спиртное
-                        </lable>
-                        <lable class="checkbox-inline">
-                            <input type="checkbox" name="obsceneLanguage" value="Непристойно выражается">
-                            Нецензурная лексика
-                        </lable>
-                        <lable class="checkbox-inline">
-                            <input type="checkbox" name="obsceneLanguage" value="Отсутствуют" checked>
-                            Отсутствуют
+                            <input type="checkbox" name="marriage" value="Да">
+                            Да
                         </lable>
                     </div>
                 </div>
                 <div class="form-group color-background-head">
                     <div class="form-group color-background-head">
                         <lable><strong>Кратко о себе</strong>
-                            <textarea class="form-control" rows="4" style="resize: none" name="about"></textarea>
+                            <textarea class="form-control" rows="4" style="resize: none" name="about" placeholder="Введите хоть что-нибудь..."></textarea>
                         </lable>
                     </div>
                 </div>
@@ -113,24 +100,22 @@
         </div>
     </div>
     <?php endif; ?>
-    <?php if ('list'): ?>
+    <?php if ($valueForTemplate === 'list'): ?>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3 form_profile">
             <table class="table table-bordered table-hover">
                 <h4 class="text-center"><strong>Список кандидатов</strong></h4>
                 <tr>
                     <th>№</th>
                     <th>Имя пользователя</th>
                     <th>Почтовый ящик</th>
-                    <th>Телефон</th>
                     <th>Дата регистрации</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
+                    <td><?php 1 ?></td>
+                    <td><?php $user['nickname'] ?></td>
+                    <td><?php $user['email'] ?></td>
+                    <td><?php $user['createdAt'] ?></td>
                 </tr>
             </table>
         </div>

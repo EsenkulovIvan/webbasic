@@ -1,4 +1,4 @@
-form {
+.form_style {
     padding: 20px;
     margin-top: 150px;
     background-color: #9acfea;
@@ -18,4 +18,10 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+.color_style {
+    background-color: #429ed2;
+}
+.form_profile {
+    margin: 20px auto;
 }

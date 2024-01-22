@@ -12,4 +12,9 @@ class Profile
     private $aboutMe;
     private $gender;
     private $familyStatus = [];
+
+    public function renderList()
+    {
+
+    }
 }

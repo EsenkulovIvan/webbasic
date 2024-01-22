@@ -12,12 +12,12 @@
     <div class="row">
         <?php if ($valueForTemplate === 'log'): ?>
         <div class="col-md-6 col-md-offset-3"">
-            <form action="" >
+            <form action="" class="form_style" method="post">
                 <h4 class="text-center"><strong>Регистрация и авторизация пользователя</strong></h4>
                 <div class="form-group color-background-head">
                     <lable >
                         <strong>Email address</strong>
-                        <input type="email" name="login" class="form-control" placeholder="Введите адрес электронной почты">
+                        <input type="email" name="email" class="form-control" placeholder="Введите адрес электронной почты">
                     </lable>
                 </div>
                 <div class="form-group color-background-head">
@@ -39,20 +39,20 @@
         <?php endif; ?>
         <?php if ($valueForTemplate === 'reg'): ?>
             <div class="col-md-6 col-md-offset-3">
-                <form action="">
+                <form action="/auth/user/reg" class="form_style" method="post">
                     <h4 class="text-center">
                         <strong>Регистрация пользователя</strong>
                     </h4>
                     <div class="form-group color-background-head">
                         <lable >
                             <strong>Nickname</strong>
-                            <input type="text" name="userName" class="form-control" placeholder="Введите имя пользователя">
+                            <input type="text" name="nickname" class="form-control" placeholder="Введите имя пользователя">
                         </lable>
                     </div>
                     <div class="form-group color-background-head">
                         <lable >
                             <strong>Email address</strong>
-                            <input type="email" name="login" class="form-control" placeholder="Введите адрес электронной почты">
+                            <input type="email" name="email" class="form-control" placeholder="Введите адрес электронной почты">
                         </lable>
                     </div>
                     <div class="form-group color-background-head">
