@@ -7,6 +7,7 @@ use PDO;
 
 class User
 {
+    private $id;
     private $email;
     private $password;
     private $nickname;
@@ -21,18 +22,24 @@ class User
 
     public static function readDataBase($query, $inputData)
     {
+        if (empty($inputData['email'])) {
+            throw new \Exception('Не ввели почтовый адрес');
+        } elseif (empty($inputData['password'])) {
+            throw new \Exception('Не ввели пароль');
+        }
+
+
         $dataBase = DataBase::getDataBaseObject();
         $prepare = $dataBase->getPdo()->prepare($query);
         $prepare->execute([$inputData['email']]);
         $prepare->setFetchMode(PDO::FETCH_CLASS, User::class);
-
-        while ($obj = $prepare->fetch()) {
-            if ($obj->email === $inputData['email'] && $obj->password === $inputData['password']) {
-                return $obj;
-            }
+        $obj = $prepare->fetch();
+        if (!($obj->email === $inputData['email'] && password_verify($inputData['password'], $obj->password))) {
+            throw new \Exception('Пользователь не зарегестрирован');
         }
-        throw new \Exception('Пользователь не зарегестрирован');
+        return $obj;
     }
+
     public static function writeDataBase($query, $inputData)
     {
         if (empty($inputData['nickname'])) {
@@ -42,9 +49,46 @@ class User
         } elseif (empty($inputData['email'])) {
             throw new \Exception('Не ввели почтовый адрес');
         }
+        if ($inputData['password'] === $inputData['confirm']) {
+            $password = password_hash($inputData['password'], PASSWORD_DEFAULT);
+            $dataBase = DataBase::getDataBaseObject();
+            $prepare = $dataBase->getPdo()->prepare($query);
+            return $prepare->execute([$inputData['email'], $password, $inputData['nickname']]);
+        } else {
+            throw new \Exception('Введен неверный пароль');
+        }
 
-        $dataBase = DataBase::getDataBaseObject();
-        $prepare = $dataBase->getPdo()->prepare($query);
-        return $prepare->execute([$inputData['email'], $inputData['password'], $inputData['nickname']]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }
