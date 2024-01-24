@@ -20,15 +20,21 @@ var_dump($db1);*/
 
 if (isset($_GET['params'])) {
     $routUri = $_GET['params'];
+} else {
+    $routUri = '';
 }
-
+//unset($_SESSION['auth']);
 $routs = require_once 'app/config/routs.php';
 
 foreach ($routs as $rout => $arrayData) {
     preg_match($rout, $routUri, $matches);
     if (!empty($matches)) {
         $arrayParams = [];
-        $arrayParams = $matches;
+        foreach ($matches as $key => $value) {
+            if (!is_numeric($key)) {
+                $arrayParams[$key] = $value;
+            }
+        }
         $controllerName = new $arrayData['controller'];
         $controllerName->{$arrayData['method']}($arrayParams);
         break;
