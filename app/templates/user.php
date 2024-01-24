@@ -10,9 +10,9 @@
 <body>
 <div class="container">
     <div class="row">
-        <?php if ($valueForTemplate === 'log'): ?>
+        <?php if ($valueForTemplate['render'] === 'log'): ?>
         <div class="col-md-6 col-md-offset-3"">
-            <form action="" class="form_style" method="post">
+            <form action="/auth/user/log" class="form_style" method="post">
                 <h4 class="text-center"><strong>Регистрация и авторизация пользователя</strong></h4>
                 <div class="form-group color-background-head">
                     <lable >
@@ -31,13 +31,13 @@
                         <button type="submit" class="btn btn-default btn-block col-md-4">Войти</button>
                     </div>
                     <div class="col-md-6 col-md-offset-2">
-                        <a class="btn btn-link btn-block" href="http://webbasic/auth/user/reg"">Зарегестрироваться</a>
+                        <a class="btn btn-link btn-block" href="/auth/user/reg"">Зарегестрироваться</a>
                     </div>
                 </div>
             </form>
         </div>
         <?php endif; ?>
-        <?php if ($valueForTemplate === 'reg'): ?>
+        <?php if ($valueForTemplate['render'] === 'reg'): ?>
             <div class="col-md-6 col-md-offset-3">
                 <form action="/auth/user/reg" class="form_style" method="post">
                     <h4 class="text-center">
@@ -64,7 +64,7 @@
                     <div class="form-group color-background-head">
                         <lable>
                             <strong>Confirm the password</strong>
-                            <input type="сonfirmThePassword" name="password" class="form-control" placeholder="Подтвердите пароль">
+                            <input type="сonfirmThePassword" name="confirm" class="form-control" placeholder="Подтвердите пароль">
                         </lable>
                     </div>
                     <div class="row">

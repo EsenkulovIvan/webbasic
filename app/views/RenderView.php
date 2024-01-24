@@ -21,8 +21,8 @@ class RenderView
         return self::$view;
     }
 
-    public function renderTemplate($template, $valueForTemplate, $user)
+    public function renderTemplate($valueForTemplate, $objects = null)
     {
-        require $this->pathToTemplate . '/' . $template . '.php';
+        require $this->pathToTemplate . '/' . $valueForTemplate['template'] . '.php';
     }
 }

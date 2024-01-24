@@ -8,10 +8,10 @@
 </head>
 <body>
 <div class="container">
-    <?php if ($valueForTemplate === 'questionnaire'): ?>
+    <?php if ($valueForTemplate['render'] === 'questionnaire'): ?>
     <div class="row">
         <div class="col-md-8 col-md-offset-2 color_style form_profile">
-            <form action="">
+            <form action="/content/profile/questionnaire" method="post">
                 <h3 class="text-center">
                     <strong>Заполните свои персональные данные</strong>
                 </h3>
@@ -72,6 +72,9 @@
                         <input type="text" name="phone" class="form-control" placeholder="Номер телефона">
                     </lable>
                 </div>
+                <div class="form-group color-background-head">
+                    <input type="hidden" name="statusIsProfileSave" value="1" class="form-control">
+                </div>
                 <div class="checkbox">
                     <strong>Состоите в браке</strong>
                     <div class="col-md-offset-1">
@@ -100,9 +103,12 @@
         </div>
     </div>
     <?php endif; ?>
-    <?php if ($valueForTemplate === 'list'): ?>
+    <?php if ($valueForTemplate['render'] === 'list'): ?>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 form_profile">
+        <div class="col-md-8 col-md-offset-2 text-center bg-success">
+            <strong><?= $valueForTemplate['success']  ?></strong>
+        </div>
+        <div class="col-md-10 col-md-offset-1 form_profile" style="background-color: #ffffff">
             <table class="table table-bordered table-hover">
                 <h4 class="text-center"><strong>Список кандидатов</strong></h4>
                 <tr>
@@ -111,15 +117,51 @@
                     <th>Почтовый ящик</th>
                     <th>Дата регистрации</th>
                 </tr>
+                <?php
+                $count = 1;
+                foreach ($objects as $object): ?>
                 <tr>
-                    <td><?php 1 ?></td>
-                    <td><?php $user['nickname'] ?></td>
-                    <td><?php $user['email'] ?></td>
-                    <td><?php $user['createdAt'] ?></td>
+                    <td><?= $count++ ?></td>
+                    <?php if ($object->getId() === $_SESSION['id']): ?>
+                    <td style="color: red"><?= $object->getNickname() ?></td>
+                    <?php else: ?>
+                    <td><?= $object->getNickname() ?></td>
+                    <?php endif; ?>
+                    <td><?= $object->getEmail() ?></td>
+                    <td><?= $object->getCreatedAt() ?></td>
                 </tr>
+                <?php endforeach; ?>
             </table>
         </div>
     </div>
+        <div class="row form_profile">
+            <div class="col-md-2 col-md-offset-2">
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
+                <a class="btn btn-default btn-block" href="/content/user/out">Посмотреть</a>
+                <?php else: ?>
+                <a class="btn btn-default btn-block" href="/content/profile/questionnaire">Заполнить</a>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
+                    <a class="btn btn-default btn-block" href="/content/user/out">Редактировать</a>
+                <?php else: ?>
+                    <a class="btn btn-default btn-block disabled" href="/content/user/out">Редактировать</a>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-2 col-md-offset-1 ">
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
+                    <a class="btn btn-default btn-block"  href="/content/user/out">Удалить</a>
+                <?php else: ?>
+                    <a class="btn btn-default btn-block disabled" href="/content/user/out">Удалить</a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <a class="btn btn-default btn-block" href="/content/user/out">Выйти</a>
+            </div>
+        </div>
     <?php endif ?>
 </div>
 </body>
