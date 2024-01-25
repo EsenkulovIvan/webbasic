@@ -79,6 +79,7 @@
                     <strong>Состоите в браке</strong>
                     <div class="col-md-offset-1">
                         <lable class="checkbox-inline">
+                            <input type="hidden" name="marriage" value="Нет">
                             <input type="checkbox" name="marriage" value="Да">
                             Да
                         </lable>
@@ -123,7 +124,8 @@
                 <tr>
                     <td><?= $count++ ?></td>
                     <?php if ($object->getId() === $_SESSION['id']): ?>
-                    <td style="color: red"><?= $object->getNickname() ?></td>
+                    <?php $currentId = $object->getId() ?>
+                    <td style="color: red"><?= $currentUser = $object->getNickname() ?></td>
                     <?php else: ?>
                     <td><?= $object->getNickname() ?></td>
                     <?php endif; ?>
@@ -132,28 +134,29 @@
                 </tr>
                 <?php endforeach; ?>
             </table>
+            <h5 class="text-center"><strong>Активный пользователь: <?= $currentUser ?></strong></h5>
         </div>
     </div>
         <div class="row form_profile">
             <div class="col-md-2 col-md-offset-2">
-                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
-                <a class="btn btn-default btn-block" href="/content/user/out">Посмотреть</a>
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $currentId === $_SESSION['userId']): ?>
+                <a class="btn btn-default btn-block" href="/content/workwithprofile/look">Посмотреть</a>
                 <?php else: ?>
                 <a class="btn btn-default btn-block" href="/content/profile/questionnaire">Заполнить</a>
                 <?php endif; ?>
             </div>
             <div class="col-md-2 col-md-offset-1">
-                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
-                    <a class="btn btn-default btn-block" href="/content/user/out">Редактировать</a>
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $currentId === $_SESSION['userId']): ?>
+                    <a class="btn btn-default btn-block" href="/content/workwithprofile/redactor">Редактировать</a>
                 <?php else: ?>
-                    <a class="btn btn-default btn-block disabled" href="/content/user/out">Редактировать</a>
+                    <a class="btn btn-default btn-block disabled" href="/content/workwithprofile/redactor">Редактировать</a>
                 <?php endif; ?>
             </div>
             <div class="col-md-2 col-md-offset-1 ">
-                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $object->getId() === $_SESSION['userId']): ?>
-                    <a class="btn btn-default btn-block"  href="/content/user/out">Удалить</a>
+                <?php if (isset($_SESSION['isProfileSave']) && $_SESSION['isProfileSave'] == 1 && $currentId === $_SESSION['userId']): ?>
+                    <a class="btn btn-default btn-block"  href="/content/workwithprofile/delete">Удалить</a>
                 <?php else: ?>
-                    <a class="btn btn-default btn-block disabled" href="/content/user/out">Удалить</a>
+                    <a class="btn btn-default btn-block disabled" href="/content/workwithprofile/delete">Удалить</a>
                 <?php endif; ?>
             </div>
         </div>

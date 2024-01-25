@@ -27,14 +27,14 @@ class User
         } elseif (empty($inputData['password'])) {
             throw new \Exception('Не ввели пароль');
         }
-
-
+        $email = htmlspecialchars($inputData['email']);
+        $password = htmlspecialchars($inputData['password']);
         $dataBase = DataBase::getDataBaseObject();
         $prepare = $dataBase->getPdo()->prepare($query);
-        $prepare->execute([$inputData['email']]);
+        $prepare->execute([$email]);
         $prepare->setFetchMode(PDO::FETCH_CLASS, User::class);
         $obj = $prepare->fetch();
-        if (!($obj->email === $inputData['email'] && password_verify($inputData['password'], $obj->password))) {
+        if (!((!empty($obj)) && $obj->getEmail() === $email && password_verify($password, $obj->getPassword()))) {
             throw new \Exception('Пользователь не зарегестрирован');
         }
         return $obj;
@@ -49,15 +49,36 @@ class User
         } elseif (empty($inputData['email'])) {
             throw new \Exception('Не ввели почтовый адрес');
         }
-        if ($inputData['password'] === $inputData['confirm']) {
-            $password = password_hash($inputData['password'], PASSWORD_DEFAULT);
+        $nickname = htmlspecialchars($inputData['nickname']);
+        $email = htmlspecialchars($inputData['email']);
+        $password = htmlspecialchars($inputData['password']);
+        $confirm = htmlspecialchars($inputData['confirm']);
+        if ($password === $confirm) {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $dataBase = DataBase::getDataBaseObject();
             $prepare = $dataBase->getPdo()->prepare($query);
-            return $prepare->execute([$inputData['email'], $password, $inputData['nickname']]);
+            return $prepare->execute([$email, $passwordHash, $nickname]);
         } else {
             throw new \Exception('Введен неверный пароль');
         }
 
+    }
+
+    public static function getUser($query)
+    {
+        $dataBase = DataBase::getDataBaseObject();
+        $prepare = $dataBase->getPdo()->prepare($query);
+        $prepare->execute([$_SESSION['id']]);
+        $prepare->setFetchMode(PDO::FETCH_CLASS, User::class);
+        $user = $prepare->fetch();
+        return $user;
+    }
+
+    public static function deleteUser($query)
+    {
+                $dataBase = DataBase::getDataBaseObject();
+                $prepare = $dataBase->getPdo()->prepare($query);
+                $prepare->execute([$_SESSION['id']]);
     }
 
     /**
@@ -90,5 +111,13 @@ class User
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }
