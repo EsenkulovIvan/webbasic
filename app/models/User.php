@@ -44,10 +44,10 @@ class User
     {
         if (empty($inputData['nickname'])) {
             throw new \Exception('Не ввели имя пользователя');
-        } elseif (empty($inputData['password'])) {
-            throw new \Exception('Не ввели пароль');
         } elseif (empty($inputData['email'])) {
             throw new \Exception('Не ввели почтовый адрес');
+        } elseif (empty($inputData['password'])) {
+            throw new \Exception('Не ввели пароль');
         }
         $nickname = htmlspecialchars($inputData['nickname']);
         $email = htmlspecialchars($inputData['email']);
@@ -57,11 +57,12 @@ class User
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $dataBase = DataBase::getDataBaseObject();
             $prepare = $dataBase->getPdo()->prepare($query);
-            return $prepare->execute([$email, $passwordHash, $nickname]);
+            $prepare->execute([$email, $passwordHash, $nickname]);
+            $_SESSION['id'] = $dataBase->getPdo()->lastInsertId();
+            return $prepare;
         } else {
             throw new \Exception('Введен неверный пароль');
         }
-
     }
 
     public static function getUser($query)

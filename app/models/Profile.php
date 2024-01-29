@@ -62,11 +62,23 @@ class Profile
             throw new \Exception('Не выбрали пол');
         } elseif (empty($inputData['phone'])) {
             throw new \Exception('Не ввели номер телефона');
+        } elseif (empty($inputData['marriage'])) {
+            throw new \Exception('Не ввели состояние о браке');
+        } elseif (empty($inputData['about'])) {
+            throw new \Exception('Не ввели информацию о себе');
         }
-
+        $surname = htmlspecialchars($inputData['surname']);
+        $name = htmlspecialchars($inputData['name']);
+        $jobTitle = htmlspecialchars($inputData['jobTitle']);
+        $company = htmlspecialchars($inputData['company']);
+        $education = htmlspecialchars($inputData['education']);
+        $gender = htmlspecialchars($inputData['gender']);
+        $phone = htmlspecialchars($inputData['phone']);
+        $marriage = htmlspecialchars($inputData['marriage']);
+        $about = htmlspecialchars($inputData['about']);
         $dataBase = DataBase::getDataBaseObject();
         $prepare = $dataBase->getPdo()->prepare($query);
-        return $prepare->execute([$inputData['surname'], $inputData['name'], $inputData['jobTitle'], $inputData['company'], $inputData['education'], $inputData['gender'], $inputData['phone'], $inputData['marriage'], $inputData['about'], $_SESSION['id']]);
+        return $prepare->execute([$surname, $name, $jobTitle, $company, $education, $gender, $phone, $marriage, $about, $_SESSION['id']]);
     }
 
     public static function writeQuestionnaire($query, $inputData)
@@ -85,6 +97,8 @@ class Profile
             throw new \Exception('Не выбрали пол');
         } elseif (empty($inputData['phone'])) {
             throw new \Exception('Не ввели номер телефона');
+        } elseif (empty($inputData['about'])) {
+            throw new \Exception('Не ввели информацию о себе');
         }
         $surname = htmlspecialchars($inputData['surname']);
         $name = htmlspecialchars($inputData['name']);

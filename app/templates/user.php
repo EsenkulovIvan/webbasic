@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ru">
 <head>
@@ -22,7 +21,9 @@
                 <div class="form-group color-background-head">
                     <lable >
                         <strong>Email address</strong>
-                        <input type="email" name="email" class="form-control" placeholder="Введите адрес электронной почты">
+                        <input type="email" name="email" class="form-control" placeholder="Введите адрес электронной почты" value="<?php if (!empty($_POST['email'])) {
+                            echo $_POST['email'];
+                        } ?>"">
                     </lable>
                 </div>
                 <div class="form-group color-background-head">
@@ -43,13 +44,13 @@
         </div>
         <?php endif; ?>
         <?php if ($valueForTemplate['render'] === 'reg'): ?>
-            <div class="col-md-6 col-md-offset-3">
-                <div class="col-md-8 col-md-offset-2 text-center bg-success">
-                    <strong><?php if (!empty($valueForTemplate['error'])) {
-                            echo $valueForTemplate['error'];
-                        } ?></strong>
-                </div>
-                <form action="/auth/user/reg" class="form_style" method="post">
+            <div class="col-md-6 col-md-offset-3 form_style">
+                <?php if (!empty($valueForTemplate['error'])): ?>
+                    <div class="col-md-8 col-md-offset-2 text-center bg-success">
+                        <strong><?= $valueForTemplate['error']  ?></strong>
+                    </div>
+                <?php endif; ?>
+                <form action="/auth/user/reg" method="post">
                     <h4 class="text-center">
                         <strong>Регистрация пользователя</strong>
                     </h4>
@@ -66,7 +67,7 @@
                             <strong>Email address</strong>
                             <input type="email" name="email" class="form-control" placeholder="Введите адрес электронной почты" value="<?php if (!empty($_POST['email'])) {
                                 echo $_POST['email'];
-                            } ?>"">
+                            } ?>">
                         </lable>
                     </div>
                     <div class="form-group color-background-head">
@@ -82,8 +83,11 @@
                         </lable>
                     </div>
                     <div class="row">
-                        <div class="col-md-offset-3 col-md-6">
+                        <div class="col-md-6">
                             <button type="submit" class="btn btn-default btn-block col-md-4">Зарегестрироваться</button>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2">
+                            <a class="btn btn-default btn-block" href="/auth/user/log">Отмена</a>
                         </div>
                     </div>
                 </form>

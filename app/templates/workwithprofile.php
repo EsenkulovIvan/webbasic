@@ -11,6 +11,11 @@
     <?php if ($valueForTemplate['render'] === 'redactor'): ?>
         <div class="row">
             <div class="col-md-8 col-md-offset-2 color_style form_profile">
+                <?php if (isset($valueForTemplate['error'])): ?>
+                    <div class="col-md-8 col-md-offset-2 text-center bg-success">
+                        <strong><?= $valueForTemplate['error']  ?></strong>
+                    </div>
+                <?php endif; ?>
                 <form action="/content/workwithprofile/redactor" method="post">
                     <h3 class="text-center">
                         <strong>Отредактировать данные</strong>
@@ -130,8 +135,11 @@
                     <input type="password" name="password" class="form-control" placeholder="Введите пароль">
                 </lable>
             </div>
-            <div class="col-md-offset-3 col-md-6">
+            <div class="col-md-6">
                 <button type="submit" class="btn btn-default btn-block col-md-4">Удалить аккаунт</button>
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <a class="btn btn-default btn-block" href="/content/profile/list">Отмена</a>
             </div>
         </form>
     </div>

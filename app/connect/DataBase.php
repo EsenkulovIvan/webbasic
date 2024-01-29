@@ -6,7 +6,6 @@ use PDO;
 
 class DataBase
 {
-    private static $count;
     private static $dataBaseObject;
     private $pdo;
 

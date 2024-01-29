@@ -87,17 +87,17 @@ class ProfileController
             if (!empty($_POST)) {
                 $query = 'INSERT INTO `profile` (surname, name, job_title, company, education, gender, phone, marriage, about_me, user_id, status_is_profile_save) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 try {
-                    $success = Profile::writeQuestionnaire($query, $_POST);
-                    if ($success) {
-                        $query = 'SELECT * FROM `profile` WHERE user_id = ?';
-                        $profile = Profile::getProfile($query, $_SESSION['id']);
-                        $_SESSION['isProfileSave'] = $profile->getStatusIsProfileSave();
-                        $_SESSION['userId'] = $profile->getUserId();
-                        header('Location: /content/profile/list');
-                        die;
-                    }
+                    Profile::writeQuestionnaire($query, $_POST);
+                    $query = 'SELECT * FROM `profile` WHERE user_id = ?';
+                    $profile = Profile::getProfile($query, $_SESSION['id']);
+                    $_SESSION['isProfileSave'] = $profile->getStatusIsProfileSave();
+                    $_SESSION['userId'] = $profile->getUserId();
+                    header('Location: /content/profile/list');
+                    die;
+
                 } catch (\Exception $e) {
-                    echo $e->getMessage();
+                    $arr['error'] = 'Ошибка! ' . $e->getMessage();
+                    RenderView::getRenderViewObject()->renderTemplate($arr);
                 }
             } else {
                 RenderView::getRenderViewObject()->renderTemplate($arr);

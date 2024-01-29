@@ -11,6 +11,11 @@
     <?php if ($valueForTemplate['render'] === 'questionnaire'): ?>
     <div class="row">
         <div class="col-md-8 col-md-offset-2 color_style form_profile">
+            <?php if (isset($valueForTemplate['error'])): ?>
+                <div class="col-md-8 col-md-offset-2 text-center bg-success">
+                    <strong><?= $valueForTemplate['error']  ?></strong>
+                </div>
+            <?php endif; ?>
             <form action="/content/profile/questionnaire" method="post">
                 <h3 class="text-center">
                     <strong>Заполните свои персональные данные</strong>
@@ -125,7 +130,7 @@
                     <td><?= $count++ ?></td>
                     <?php if ($object->getId() === $_SESSION['id']): ?>
                     <?php $currentId = $object->getId() ?>
-                    <td style="color: red"><?= $currentUser = $object->getNickname() ?></td>
+                    <td style="color: blue"><?= $currentUser = $object->getNickname() ?></td>
                     <?php else: ?>
                     <td><?= $object->getNickname() ?></td>
                     <?php endif; ?>
