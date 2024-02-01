@@ -81,12 +81,26 @@
                     <input type="hidden" name="statusIsProfileSave" value="1" class="form-control">
                 </div>
                 <div class="checkbox">
-                    <strong>Состоите в браке</strong>
+                    <strong>Семейное положение</strong>
                     <div class="col-md-offset-1">
                         <lable class="checkbox-inline">
-                            <input type="hidden" name="marriage" value="Нет">
-                            <input type="checkbox" name="marriage" value="Да">
-                            Да
+                            <input type="hidden" name="familyStatus[married]" value="Не женат(не замужем)">
+                            <input type="checkbox" name="familyStatus[married]" value="Женат(замужем)">
+                            Состоите в браке?
+                        </lable>
+                    </div>
+                    <div class="col-md-offset-1">
+                        <lable class="checkbox-inline">
+                            <input type="hidden" name="familyStatus[haveChildren]" value="Детей нет">
+                            <input type="checkbox" name="familyStatus[haveChildren]" value="Есть дети">
+                            Есть дети?
+                        </lable>
+                    </div>
+                    <div class="col-md-offset-1">
+                        <lable class="checkbox-inline">
+                            <input type="hidden" name="familyStatus[haveBrothersOrSisters]" value="Единственный ребенок в семье">
+                            <input type="checkbox" name="familyStatus[haveBrothersOrSisters]" value="Есть братья и сестры">
+                            Eсть родные братья или сестры?
                         </lable>
                     </div>
                 </div>

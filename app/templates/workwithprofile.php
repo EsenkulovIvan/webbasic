@@ -62,11 +62,29 @@
                             <input type="text" name="phone" class="form-control" placeholder="Номер телефона" value="<?= $objects->getPhone() ?>">
                         </lable>
                     </div>
-                    <div class="form-group color-background-head">
-                        <lable>
-                            <strong>Состоите в браке</strong>
-                            <input type="text" name="marriage" class="form-control" placeholder="Да/Нет" value="<?= $objects->getMarriage() ?>">
-                        </lable>
+                    <div class="checkbox">
+                        <strong>Семейное положение</strong>
+                        <div class="col-md-offset-1">
+                            <lable class="checkbox-inline">
+                                <input type="hidden" name="familyStatus[married]" value="Не женат(не замужем)">
+                                <input type="checkbox" name="familyStatus[married]" value="Женат(замужем)">
+                                Состоите в браке?
+                            </lable>
+                        </div>
+                        <div class="col-md-offset-1">
+                            <lable class="checkbox-inline">
+                                <input type="hidden" name="familyStatus[haveChildren]" value="Детей нет">
+                                <input type="checkbox" name="familyStatus[haveChildren]" value="Есть дети">
+                                Есть дети?
+                            </lable>
+                        </div>
+                        <div class="col-md-offset-1">
+                            <lable class="checkbox-inline">
+                                <input type="hidden" name="familyStatus[haveBrothersOrSisters]" value="Единственный ребенок в семье">
+                                <input type="checkbox" name="familyStatus[haveBrothersOrSisters]" value="Есть братья и сестры">
+                                Eсть родные братья или сестры?
+                            </lable>
+                        </div>
                     </div>
                     <div class="form-group color-background-head">
                         <div class="form-group color-background-head">
@@ -100,20 +118,25 @@
                         <th>Образование</th>
                         <th>Пол</th>
                         <th>Телефон</th>
-                        <th>Состоите в браке</th>
+                        <th>Семейное положение</th>
                         <th>Кратко о себе</th>
                     </tr>
-                        <tr>
-                            <td><?= $objects->getSurname() ?></td>
-                            <td><?= $objects->getName() ?></td>
-                            <td><?= $objects->getCompany() ?></td>
-                            <td><?= $objects->getJobTitle() ?></td>
-                            <td><?= $objects->getEducation() ?></td>
-                            <td><?= $objects->getGender() ?></td>
-                            <td><?= $objects->getPhone() ?></td>
-                            <td><?= $objects->getMarriage() ?></td>
-                            <td><?= $objects->getAboutMe() ?></td>
-                        </tr>
+                    <tr>
+                        <td><?= $objects->getSurname() ?></td>
+                        <td><?= $objects->getName() ?></td>
+                        <td><?= $objects->getCompany() ?></td>
+                        <td><?= $objects->getJobTitle() ?></td>
+                        <td><?= $objects->getEducation() ?></td>
+                        <td><?= $objects->getGender() ?></td>
+                        <td><?= $objects->getPhone() ?></td>
+                        <td>
+                            <?php $count = 1; ?>
+                            <?php foreach (explode('-', $objects->getFamilyStatus()) as $item): ?>
+                                <?= $count++ . '. ' .$item . '<br>' ?>
+                            <?php endforeach; ?>
+                        </td>
+                        <td><?= $objects->getAboutMe() ?></td>
+                    </tr>
                 </table>
             </div>
         </div>

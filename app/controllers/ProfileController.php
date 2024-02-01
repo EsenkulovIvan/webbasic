@@ -63,7 +63,7 @@ class ProfileController
                     die;
                 }
             } else {
-                $query = 'UPDATE `profile` SET surname = ?, name = ?, job_title = ?, company = ?, education = ?, gender = ?, phone = ?, marriage = ?, about_me = ? WHERE user_id = ?';
+                $query = 'UPDATE `profile` SET surname = ?, name = ?, job_title = ?, company = ?, education = ?, gender = ?, phone = ?, family_status = ?, about_me = ? WHERE user_id = ?';
                 try {
                     Profile::redactorProfile($query, $_POST);
                     $_SESSION['flash'] = 'Профиль успешно отредактирован';
@@ -85,7 +85,7 @@ class ProfileController
     {
         if ($_SESSION['auth']) {
             if (!empty($_POST)) {
-                $query = 'INSERT INTO `profile` (surname, name, job_title, company, education, gender, phone, marriage, about_me, user_id, status_is_profile_save) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+                $query = 'INSERT INTO `profile` (surname, name, job_title, company, education, gender, phone, family_status, about_me, user_id, status_is_profile_save) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
                 try {
                     Profile::writeQuestionnaire($query, $_POST);
                     $query = 'SELECT * FROM `profile` WHERE user_id = ?';

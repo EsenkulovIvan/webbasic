@@ -10,9 +10,7 @@ spl_autoload_register(function (string $className) {
     require __DIR__ . '/' . $namespace . '/' . $className . '.php';
 });
 
-if (isset($_GET['params'])) {
-    $routUri = $_GET['params'];
-}
+$routUri = $_GET['params'];
 
 $routs = require_once 'app/config/routs.php';
 

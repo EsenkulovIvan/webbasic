@@ -17,7 +17,7 @@ class Profile
     private $phone;
     private $aboutMe;
     private $userId;
-    private $marriage;
+    private $familyStatus;
     private $statusIsProfileSave;
 
     public function __set($name, $value)
@@ -62,8 +62,6 @@ class Profile
             throw new \Exception('Не выбрали пол');
         } elseif (empty($inputData['phone'])) {
             throw new \Exception('Не ввели номер телефона');
-        } elseif (empty($inputData['marriage'])) {
-            throw new \Exception('Не ввели состояние о браке');
         } elseif (empty($inputData['about'])) {
             throw new \Exception('Не ввели информацию о себе');
         }
@@ -74,11 +72,11 @@ class Profile
         $education = htmlspecialchars($inputData['education']);
         $gender = htmlspecialchars($inputData['gender']);
         $phone = htmlspecialchars($inputData['phone']);
-        $marriage = htmlspecialchars($inputData['marriage']);
         $about = htmlspecialchars($inputData['about']);
+        $familyStatus = htmlspecialchars(implode('-', $inputData['familyStatus']));
         $dataBase = DataBase::getDataBaseObject();
         $prepare = $dataBase->getPdo()->prepare($query);
-        return $prepare->execute([$surname, $name, $jobTitle, $company, $education, $gender, $phone, $marriage, $about, $_SESSION['id']]);
+        return $prepare->execute([$surname, $name, $jobTitle, $company, $education, $gender, $phone, $familyStatus, $about, $_SESSION['id']]);
     }
 
     public static function writeQuestionnaire($query, $inputData)
@@ -107,11 +105,11 @@ class Profile
         $education = htmlspecialchars($inputData['education']);
         $gender = htmlspecialchars($inputData['gender']);
         $phone = htmlspecialchars($inputData['phone']);
-        $marriage = htmlspecialchars($inputData['marriage']);
         $about = htmlspecialchars($inputData['about']);
+        $familyStatus = htmlspecialchars(implode('-', $inputData['familyStatus']));
         $dataBase = DataBase::getDataBaseObject();
         $prepare = $dataBase->getPdo()->prepare($query);
-        return $prepare->execute([$surname, $name, $jobTitle, $company, $education, $gender, $phone, $marriage, $about, $_SESSION['id'], $inputData['statusIsProfileSave']]);
+        return $prepare->execute([$surname, $name, $jobTitle, $company, $education, $gender, $phone, $familyStatus, $about, $_SESSION['id'], $inputData['statusIsProfileSave']]);
     }
 
     public static function deleteProfile($query)
@@ -143,14 +141,6 @@ class Profile
     public function getUserId()
     {
         return $this->userId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMarriage()
-    {
-        return $this->marriage;
     }
 
     /**
@@ -215,5 +205,13 @@ class Profile
     public function getAboutMe()
     {
         return $this->aboutMe;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFamilyStatus()
+    {
+        return $this->familyStatus;
     }
 }
